@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('',views.IndexPage.as_view())
+    path('',views.IndexPage.as_view()),
+    path('airports/',views.Airport_list)
 ]

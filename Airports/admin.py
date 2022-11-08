@@ -8,5 +8,5 @@ class AirportAdmin(admin.ModelAdmin):
     #prepopulated_fields={'slug':('title',)}
     list_filter = ('type','scheduled_service','continent')
     list_display = ('ident','name','type','iso_region')
-    
+    search_fields = ['ident','name']
 admin.site.register(Airport,AirportAdmin)

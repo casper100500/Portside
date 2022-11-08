@@ -4,7 +4,8 @@ from django.db import models
 
 
 class Airport(models.Model):
-    ident = models.CharField(max_length=10)  # max7 pk=True
+    id = models.IntegerField(null=True,blank=True)  #for airports.csv file
+    ident = models.CharField(max_length=10,primary_key=True)  # max7 pk=True
     type = models.CharField(max_length=20)  # max14
     name = models.CharField(max_length=100)  # max83
     latitude_deg = models.CharField(max_length=25)  # max24
