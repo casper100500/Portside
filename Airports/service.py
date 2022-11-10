@@ -16,7 +16,7 @@ def csvFileToModel(type):
     reader = csv.DictReader(csvfile)
     list_of_dict = list(reader)
     totalrows = len(list_of_dict)
-
+    print('type:'+type)
     print('Total:'+str(totalrows))
     print('Loading...')
     objs = [

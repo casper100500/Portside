@@ -37,5 +37,8 @@ This code belongs to Mykola GORBAN.
 2. Create public repository on https://github.com/
   - the source code of the application has to be in the repository
 
-# Usage
-- TDB
+# Usage (draft)
+
+run
+
+docker -d compose up

@@ -57,8 +57,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             # BASE_DIR / "challenges" / "templates" OK
-            BASE_DIR / r'Portside\templates',
-            r'Airports\templates'
+            BASE_DIR / r'Portside/templates',
+            r'Airports/templates'
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,8 +122,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    r"Airports\static",
-    BASE_DIR / r"Portside\static"
+    r"Airports/static",
+    BASE_DIR / r"Portside/static"
 
 ]
 # Default primary key field type
@@ -131,8 +131,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 #Celery settings **namespace='CELERY'
-REDIS_HOST='127.0.0.1'
+REDIS_HOST='redis'
 REDIS_PORT='6379'
 CELERY_BROKER_URL='redis://'+REDIS_HOST+':'+REDIS_PORT+'/0'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout':3600}

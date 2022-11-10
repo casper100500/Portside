@@ -13,9 +13,9 @@ app.autodiscover_tasks()
 app.conf.beat_schedule={
     'run-download-update-every-5-minute':{
         'task':'Airports.tasks.task_bulk_create_update',
-        'args': ('file'), #default type='url' if there is no Internet then type='file'...
-        'schedule': 10.0
-        #'schedule':crontab(minute='*/2'),
+        'args': ['url'], #default type='url' if there is no Internet then type='file'...
+        #'schedule': 60.0
+        'schedule':crontab(minute='*/10'),
     },
 }
 
