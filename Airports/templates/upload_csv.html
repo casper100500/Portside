@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+Airports
+{% endblock %}
+
+{% block content %}
+
+<h2>Import Airports list to model from file:</h2>
+<form action="/csv_upload_PC" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="csv_file" required="" id="id_csv_file">
+   <p><button>Upload from file</button></p>
+</form>
+
+<h2>Import Airports list to model from url (davidmegginson.github.io/...):</h2>
+<form action="/csv_upload_link" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+   <button>Upload from url</button>
+</form>
+
+<h2>Truncate Airport Model:</h2>
+<form action="/tuncate_model" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+   <button>Clear Airport Model</button>
+</form>
+<ul></ul>
+<a href="/">Go Back</a>
+
+{% endblock %}

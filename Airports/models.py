@@ -10,7 +10,7 @@ class Airport(models.Model):
     name = models.CharField(max_length=100)  # max83
     latitude_deg = models.CharField(max_length=25)  # max24
     longitude_deg = models.CharField(max_length=25)  # max21
-    elevation_ft = models.IntegerField()  # max5
+    elevation_ft = models.IntegerField(null=True,blank=True)  # max5
     continent = models.CharField(max_length=2)  # max2
     iso_country = models.CharField(max_length=2)  # max2
     iso_region = models.CharField(max_length=10)  # max7
