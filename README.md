@@ -13,6 +13,7 @@ This code belongs to Mykola GORBAN.
 - Django:
 
   - build Airport model(fields -> airports.csv)
+
 - Django Admin:
 
   - List of Airports 
@@ -33,12 +34,39 @@ This code belongs to Mykola GORBAN.
 
 # Requirements:
 1. Application has to run in docker/docker compose
+
   - docker compose up
+
 2. Create public repository on https://github.com/
+
   - the source code of the application has to be in the repository
 
-# Usage (draft)
+# Quickstart
 
-run
+- Install Docker
 
-docker -d compose up
+- Run following command in the project directory:
+
+```shell
+docker compose up
+```
+
+- Go to:
+
+```
+http://127.0.0.1:8000/
+```
+
+- To access admin panel:
+
+
+
+```
+Login: admin
+```
+
+```
+Password: 123
+```
+
+- You can upload airports data through portal manually (form csv file or by url) or wait for 20 minutes when celery will upload data automatically from url.

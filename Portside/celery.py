@@ -11,11 +11,11 @@ app.autodiscover_tasks()
 
 #beat doesn't work on Windows 10
 app.conf.beat_schedule={
-    'run-download-update-every-5-minute':{
+    'run-download-update-every-20-minutes':{
         'task':'Airports.tasks.task_bulk_create_update',
         'args': ['url'], #default type='url' if there is no Internet then type='file'...
         #'schedule': 60.0
-        'schedule':crontab(minute='*/10'),
+        'schedule':crontab(minute='*/20'),
     },
 }
 

@@ -1,7 +1,6 @@
-from django.shortcuts import render
+
 from django.views.generic.base import TemplateView
 
-from django.http import JsonResponse
 from .models import Airport
 from .serializers import AirportSerializer
 from rest_framework.decorators import api_view
@@ -9,8 +8,12 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .tasks import task_bulk_create_update
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponse
+
+#from django.http import JsonResponse
+#from django.shortcuts import render
 #from django.views import View
+#from django.http import HttpResponseRedirect
 
 
 @api_view(['GET','POST'])
@@ -21,17 +24,24 @@ def Airport_list(request):
         print(request.data)
         airports=Airport.objects.filter(ident=request.data['ident'])
         serializer= AirportSerializer(airports,many=True) #many=True -> serialize all records 
-        return JsonResponse({"airports":serializer.data}) #,safe=False
+        #return JsonResponse({"airports":serializer.data}) #,safe=False
+        if airports:
+          return Response({"airports":serializer.data},status=status.HTTP_200_OK)
+        else:
+          return Response('{"Error":"Data not found"}',status=status.HTTP_404_NOT_FOUND)
       else:
         airports=Airport.objects.all()
         serializer= AirportSerializer(airports,many=True) #many=True -> serialize all records 
-        return JsonResponse({"airports":serializer.data}) #,safe=False
+        #return JsonResponse({"airports":serializer.data}) #,safe=False
+        return Response({"airports":serializer.data},status=status.HTTP_200_OK)
     
     if request.method=='POST':
         serializer=AirportSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response('{"Error":"Bad request"}',status=status.HTTP_400_BAD_REQUEST)
 
 # Create your views here.
 class IndexPage(TemplateView):
@@ -58,7 +68,7 @@ def TruncateModel(request):
 #Upload from url
 def UploadCSVlink(request):
     task_bulk_create_update.delay(type='url')
-    return HttpResponse('Done')
+    return HttpResponse("Celery task has been started. Watch celery's logs for more details.")
 
 
 #Upload from file
@@ -70,4 +80,4 @@ def store_file(csvfile):
 def UploadCSVpc(request):
         store_file(request.FILES['csv_file'])
         task_bulk_create_update.delay(type='file')
-        return HttpResponse('Done')
+        return HttpResponse("Celery task has been started. Watch celery's logs for more details.")
